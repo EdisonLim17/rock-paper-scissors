@@ -4,4 +4,14 @@ function getComputerChoice() {
     console.log(choice);
 }
 
+function getHumanChoice() {
+    let choice = "invalid";
+    while(choice === "invalid"){
+        let input = prompt("Rock (r), Paper (p), or Scissors (s)?")
+        choice = (input === "r") ? "rock" : (input === "p") ? "paper" : (input === "s") ? "scissors" : "invalid";
+    }
+    console.log(choice);
+}
+
 getComputerChoice();
+getHumanChoice();
