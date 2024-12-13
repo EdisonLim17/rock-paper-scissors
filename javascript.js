@@ -14,30 +14,85 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+    let result = document.createElement("p");
     if (humanChoice === computerChoice) {
-        console.log("Tie!");
-        return 1;
+        result.textContent = "Tie!";
     } else if(humanChoice === "rock" && computerChoice === "scissors" || humanChoice === "paper" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice === "paper"){
-        console.log("You Win! " + humanChoice + " beats " + computerChoice + "!");
-        return 2;
+        result.textContent = "You Win! " + humanChoice + " beats " + computerChoice + "!";
+        
+        humanScore++;
     } else {
-        console.log("You Lose! " + computerChoice + " beats " + humanChoice + "!");
-        return 0;
+        result.textContent = "You Lose! " + computerChoice + " beats " + humanChoice + "!";
+
+        computerScore++;
     }
+    resultDisplay.appendChild(result);
+    let score = document.createElement("p");
+    score.textContent = "Your Score: " + humanScore + ". Computer's Score: " + computerScore + ".";
+    resultDisplay.appendChild(score);
 }
 
-function playGame() {
-    let humanScore = 0, computerScore = 0;
-    for(let i = 0; i < 5; i++){
-        result = playRound(getHumanChoice(), getComputerChoice());
-        if (result === 2) {humanScore++;}
-        else if (result === 0) {computerScore++;}
-    }
-    if (humanScore === computerScore) {console.log("Final Result: Tie!");}
-    else if (humanScore > computerScore) {console.log("Final Result: You Win!");}
-    else {console.log("Final Result: You Lose.");}
-    console.log("Your Final Score: " + humanScore);
-    console.log("Computer's Final Score: " + computerScore);
-}
+let humanScore = 0, computerScore = 0;
 
-playGame();
+const rockButton = document.querySelector("#Rock");
+const paperButton = document.querySelector("#Paper");
+const scissorsButton = document.querySelector("#Scissors");
+
+const resultDisplay = document.querySelector(".result-display");
+
+rockButton.addEventListener("click", () => {
+    if(humanScore === 0){resultDisplay.textContent = "";}
+
+    playRound("rock", getComputerChoice());
+
+    if(humanScore === 5){
+        finalResult = document.createElement("p");
+        finalResult.textContent = "Final Result: You Win!";
+        resultDisplay.appendChild(finalResult);
+        humanScore = 0, computerScore = 0;
+    }
+    else if(computerScore === 5){
+        finalResult = document.createElement("p");
+        finalResult.textContent = "Final Result: You Lose.";
+        resultDisplay.appendChild(finalResult);
+        humanScore = 0, computerScore = 0;
+    }
+});
+
+paperButton.addEventListener("click", () => {
+    if(humanScore === 0){resultDisplay.textContent = "";}
+
+    playRound("paper", getComputerChoice());
+
+    if(humanScore === 5){
+        finalResult = document.createElement("p");
+        finalResult.textContent = "Final Result: You Win!";
+        resultDisplay.appendChild(finalResult);
+        humanScore = 0, computerScore = 0;
+    }
+    else if(computerScore === 5){
+        finalResult = document.createElement("p");
+        finalResult.textContent = "Final Result: You Lose.";
+        resultDisplay.appendChild(finalResult);
+        humanScore = 0, computerScore = 0;
+    }
+});
+
+scissorsButton.addEventListener("click", () => {
+    if(humanScore === 0){resultDisplay.textContent = "";}
+
+    playRound("scissors", getComputerChoice());
+
+    if(humanScore === 5){
+        finalResult = document.createElement("p");
+        finalResult.textContent = "Final Result: You Win!";
+        resultDisplay.appendChild(finalResult);
+        humanScore = 0, computerScore = 0;
+    }
+    else if(computerScore === 5){
+        finalResult = document.createElement("p");
+        finalResult.textContent = "Final Result: You Lose.";
+        resultDisplay.appendChild(finalResult);
+        humanScore = 0, computerScore = 0;
+    }
+});
